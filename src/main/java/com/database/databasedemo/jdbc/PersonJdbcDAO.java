@@ -1,6 +1,6 @@
 package com.database.databasedemo.jdbc;
 
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,26 @@ public class PersonJdbcDAO {
 	@Autowired
 	JdbcTemplate jdbcTemplate; // Spring uses jdbc template to connect to database
 
+	class PersonRowMapper implements RowMapper<Person> {
+
+		@Override
+		public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			Person person = new Person();
+			person.setId(rs.getInt("id"));
+			person.setName(rs.getString("name"));
+			person.setLocation(rs.getString("location"));
+			person.setBirthDate(rs.getDate("birth_date"));
+
+			return person;
+		}
+
+	}
+
 	// select * from person;
 	@SuppressWarnings("unchecked")
 	public List<Person> findAll() {
-		return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper(Person.class));
+		return jdbcTemplate.query("select * from person", new PersonRowMapper());
 	}
 
 	public Person findById(int id) {
