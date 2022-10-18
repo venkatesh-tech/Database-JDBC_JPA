@@ -23,6 +23,7 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception { // When using commandlinerunner you have to implement these
 														// methods
 		logger.info("All Users -> {}", dao.findAll()); // In logger the {} will be replaced by dao.findAll() value
+		logger.info("UserId 10001 -> {}", dao.findById(10001));
 	}
 
 }

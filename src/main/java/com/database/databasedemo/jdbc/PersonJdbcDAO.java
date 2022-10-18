@@ -15,7 +15,14 @@ public class PersonJdbcDAO {
 	JdbcTemplate jdbcTemplate; // Spring uses jdbc template to connect to database
 
 	// select * from person;
+	@SuppressWarnings("unchecked")
 	public List<Person> findAll() {
 		return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper(Person.class));
+	}
+
+	@SuppressWarnings("deprecation")
+	public Person findById(int id) {
+		return jdbcTemplate.queryForObject("select * from person where id=?", new Object[] { id },
+				new BeanPropertyRowMapper<Person>(Person.class));
 	}
 }
