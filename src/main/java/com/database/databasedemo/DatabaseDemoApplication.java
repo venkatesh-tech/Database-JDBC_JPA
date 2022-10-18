@@ -24,6 +24,9 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 														// methods
 		logger.info("All Users -> {}", dao.findAll()); // In logger the {} will be replaced by dao.findAll() value
 		logger.info("UserId 10001 -> {}", dao.findById(10001));
+		logger.info("UserLocation Nidadavole -> {}", dao.findByLocation("Nidadavole"));
+		logger.info("Deleting 10004 -> No of rows deleted {}", dao.deleteById(10004));
+
 	}
 
 }
