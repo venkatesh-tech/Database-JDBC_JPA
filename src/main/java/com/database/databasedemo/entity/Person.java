@@ -2,9 +2,17 @@ package com.database.databasedemo.entity;
 
 import java.sql.Date;
 
+import javax.persistence.*;
+
+@Entity
+//@Table(name = "Person") //No need to specify beacuse of same table and class names
 public class Person {
 
+	@Id
+	@GeneratedValue
 	private int id;
+
+//	@Column(name = "name") // no need to specify beacuse of same column name 
 	private String name;
 	private String location;
 	private Date birthDate;
@@ -16,6 +24,13 @@ public class Person {
 	public Person(int id, String name, String location, Date birthDate) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.location = location;
+		this.birthDate = birthDate;
+	}
+
+	public Person(String name, String location, Date birthDate) {
+		super();
 		this.name = name;
 		this.location = location;
 		this.birthDate = birthDate;
