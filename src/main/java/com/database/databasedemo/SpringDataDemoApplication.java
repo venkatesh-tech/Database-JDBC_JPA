@@ -5,20 +5,21 @@ import java.util.Date;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.database.databasedemo.entity.Person;
-import com.database.databasedemo.jpa.PersonJpaRepository;
+import com.database.databasedemo.springdata.PersonSpringDataRepository;
 
-//@SpringBootApplication
-public class JpaDemoApplication implements CommandLineRunner {
+@SpringBootApplication
+public class SpringDataDemoApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	PersonJpaRepository repository;
+	PersonSpringDataRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(JpaDemoApplication.class, args);
+		SpringApplication.run(SpringDataDemoApplication.class, args);
 	}
 
 	@Override
@@ -27,13 +28,13 @@ public class JpaDemoApplication implements CommandLineRunner {
 
 		logger.info("Updating 10001 -> No of rows updated {}", // bug data is not loading from data.sql like insert
 																// values
-				repository.update(new Person(10001, "Venkatesh", "Hyderabad", new Date(0))));
+				repository.save(new Person(10001, "Venkatesh", "Hyderabad", new Date(0))));
 		logger.info("Updating 10002 -> No of rows updated {}",
-				repository.update(new Person(10002, "James", "Hyderabad", new Date(0))));
+				repository.save(new Person(10002, "James", "Hyderabad", new Date(0))));
 		logger.info("Updating 10003 -> No of rows updated {}",
-				repository.update(new Person(10003, "Ranga", "Hyderabad", new Date(0))));
+				repository.save(new Person(10003, "Ranga", "Hyderabad", new Date(0))));
 		logger.info("Inserting 10004 -> No of rows inserted {}",
-				repository.insert(new Person(10004, "Sophia", "Chennai", new Date(0))));
+				repository.save(new Person(10004, "Sophia", "Chennai", new Date(0))));
 		logger.info("UserId 10002 -> {}", repository.findById(10002)); // value
 		repository.deleteById(10004); // cannot use logger due to void method
 		logger.info("All Users -> {}", repository.findAll());
