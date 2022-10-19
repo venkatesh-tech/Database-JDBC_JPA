@@ -4,8 +4,8 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-@Entity
 //@Table(name = "Person") //No need to specify beacuse of same table and class names
+@Entity
 public class Person {
 
 	@Id
