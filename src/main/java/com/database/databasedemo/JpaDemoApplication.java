@@ -26,15 +26,18 @@ public class JpaDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception { // When using commandlinerunner you have to implement these
 														// methods
 
-		logger.info("Updating 10001 -> No of rows updated {}",
-				repository.update(new Person("Venkatesh", "Hyderabad", new Date(0))));
+		logger.info("Updating 10001 -> No of rows updated {}", // bug data is not loading from data.sql like insert
+																// values
+				repository.update(new Person(10001, "Venkatesh", "Hyderabad", new Date(0))));
 		logger.info("Updating 10002 -> No of rows updated {}",
-				repository.update(new Person("James", "Hyderabad", new Date(0))));
+				repository.update(new Person(10002, "James", "Hyderabad", new Date(0))));
 		logger.info("Updating 10003 -> No of rows updated {}",
 				repository.update(new Person(10003, "Ranga", "Hyderabad", new Date(0))));
 		logger.info("Inserting 10004 -> No of rows inserted {}",
 				repository.insert(new Person(10004, "Sophia", "Chennai", new Date(0))));
 		logger.info("UserId 10002 -> {}", repository.findById(10002)); // value
+		repository.deleteById(10004); // cannot use logger due to void method
+		logger.info("All Users -> {}", repository.findAll());
 
 //		logger.info("UserId 10001 -> {}", dao.findById(10001));
 //		logger.info("All Users -> {}", repository.findAll()); // In logger the {} will be replaced by dao.findAll()

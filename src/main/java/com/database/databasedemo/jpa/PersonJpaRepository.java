@@ -1,5 +1,7 @@
 package com.database.databasedemo.jpa;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.transaction.Transactional;
 
@@ -21,6 +23,11 @@ public class PersonJpaRepository {
 //		return entityManager.find(Person.class, id);
 //	}
 
+	public List<Person> findAll() {
+		TypedQuery<Person> namedQuery = entityManager.createNamedQuery("Find_All_Persons", Person.class);
+		return namedQuery.getResultList();
+	}
+
 	public Person update(Person person) {
 		return entityManager.merge(person);
 	}
@@ -31,6 +38,11 @@ public class PersonJpaRepository {
 
 	public Person findById(int id) {
 		return entityManager.find(Person.class, id);
+	}
+
+	public void deleteById(int id) {
+		Person person = findById(id);
+		entityManager.remove(person);
 	}
 
 }

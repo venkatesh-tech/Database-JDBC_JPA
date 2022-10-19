@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 //@Table(name = "Person") //No need to specify beacuse of same table and class names
 @Entity
+@NamedQuery(name = "Find_All_Persons", query = "select p from Person p")
 public class Person {
 
 	@Id
-	@GeneratedValue
+//	@GeneratedValue
 	private int id;
 
 //	@Column(name = "name") // no need to specify beacuse of same column name 
